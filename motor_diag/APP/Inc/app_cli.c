@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
-
+#include "app_dsp.h"
 #define CLI_RX_BUF_SIZE   128
 #define LOG_TX_BUF_SIZE   256
 
@@ -110,6 +110,25 @@ static void CLI_HandleCommand(char *cmd)
         BSP_DWT_DelayUs(1000);
         uint32_t dt = BSP_DWT_GetUs() - t0;
         Log_Printf("[DWT] Delay 1000us measured = %lu us\r\n", (unsigned long)dt);
+    }
+    else if (strcmp(cmd, "fft") == 0)
+    {
+        DSP_Result_t r;
+        APP_DSP_GetResult(&r);
+        Log_Printf("[FFT] Mode=%s | Peak=%.1f Hz (%.2f V) | 800Hz=%.2f V | Fault=%u | Cost=%lu us\r\n",
+                   r.sig_mode ? "FAULT" : "NORM",
+                   r.peak_freq_hz, r.peak_amp_v, r.harm_800_amp_v,
+                   (unsigned int)r.fault_flag, (unsigned long)r.fft_cost_us);
+    }
+    else if (strcmp(cmd, "sig norm") == 0)
+    {
+        APP_DSP_SetSignalMode(0);
+        Log_Printf("[SIG] Switched to 200Hz NORMAL wave\r\n");
+    }
+    else if (strcmp(cmd, "sig fault") == 0)
+    {
+        APP_DSP_SetSignalMode(1);
+        Log_Printf("[SIG] Switched to 200Hz + 800Hz FAULT wave\r\n");
     }
     else
     {
