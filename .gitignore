@@ -1,0 +1,20 @@
+# Keil MDK (适配任意子目录)
+**/MDK-ARM/motor_diag/
+**/MDK-ARM/DebugConfig/
+**/MDK-ARM/RTE/
+**/*.uvguix.*
+**/*.uvoptx
+**/*.lst
+**/*.o
+**/*.d
+**/*.crf
+**/*.dep
+**/*.axf
+**/*.hex
+**/*.map
+**/*.build_log.htm
+
+# OS / Editor
+.DS_Store
+.vscode/
+
