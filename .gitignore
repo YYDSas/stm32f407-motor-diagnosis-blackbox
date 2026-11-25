@@ -14,6 +14,10 @@
 **/*.map
 **/*.build_log.htm
 
+# PC 端测试产物（gcc/gcc-arm 编译的单元测试）
+**/tests/*.exe
+**/tests/*.out
+
 # OS / Editor
 .DS_Store
 .vscode/

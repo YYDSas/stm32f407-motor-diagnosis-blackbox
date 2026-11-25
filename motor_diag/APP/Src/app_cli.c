@@ -7,7 +7,10 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+#include "bsp_bkpsram.h"
 #include "app_dsp.h"
+#include "app_blackbox.h"
+#include <stdlib.h>
 #define CLI_RX_BUF_SIZE   128
 #define LOG_TX_BUF_SIZE   256
 
@@ -129,6 +132,40 @@ static void CLI_HandleCommand(char *cmd)
     {
         APP_DSP_SetSignalMode(1);
         Log_Printf("[SIG] Switched to 200Hz + 800Hz FAULT wave\r\n");
+    }
+    else if (strcmp(cmd, "bkp") == 0)
+{
+    const BkpsramArea_t *b = BSP_BkpSram_GetArea();
+    Log_Printf("[BKP] magic=0x%08lX state=0x%02X seq=%lu frames=%u raw=%u valid=%u\r\n",
+               (unsigned long)b->magic, (unsigned int)b->state,
+               (unsigned long)b->seq, (unsigned int)b->frame_count,
+               (unsigned int)b->raw_count, (unsigned int)BSP_BkpSram_IsFrozenValid());
+}
+else if (strcmp(cmd, "fault bkp") == 0)
+{
+    BSP_BkpSram_FillTestPatternAndFreeze();
+    Log_Printf("[BKP] Test pattern written & FROZEN. Unplug power for 10 min to verify.\r\n");
+}
+else if (strncmp(cmd, "dump", 4) == 0)
+    {
+        uint32_t n = (cmd[4] == ' ') ? (uint32_t)atoi(&cmd[5]) : 20U;
+        APP_Blackbox_PrintDump(n);
+    }
+    else if (strncmp(cmd, "snap ", 5) == 0)
+    {
+        APP_Blackbox_PrintSnapshot((uint16_t)atoi(&cmd[5]));
+    }
+    else if (strcmp(cmd, "clear") == 0)
+    {
+        APP_Blackbox_ClearAll();
+    }
+    else if (strcmp(cmd, "stress flash") == 0)
+    {
+        APP_Blackbox_SetStressMode(1U);
+    }
+    else if (strcmp(cmd, "stress stop") == 0)
+    {
+        APP_Blackbox_SetStressMode(0U);
     }
     else
     {

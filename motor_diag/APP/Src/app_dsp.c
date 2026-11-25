@@ -8,7 +8,9 @@
 #include "task.h"
 #include "arm_math.h"
 #include <math.h>
-
+#include "app_blackbox.h"
+#include "bsp_bkpsram.h"
+#include <stdlib.h>
 #define FFT_LEN          1024U
 #define ADC_FS_HZ        10240.16f
 #define DAC_LUT_LEN      128U
@@ -129,6 +131,32 @@ static void DSP_ProcessHalf(const uint16_t *raw)
     s_result.fft_cost_us    = cost_us;
     s_result.fault_flag     = (h800_v > FAULT_800_TH_V) ? 1U : 0U;
     taskEXIT_CRITICAL();
+    {
+        static uint32_t s_last_bb_tick = 0U;
+        BkpFrameMini_t bf;
+        memset(&bf, 0, sizeof(bf));
+        bf.tick_ms      = HAL_GetTick();
+        bf.z_score      = h800_v;
+        bf.rms_mg       = peak_v;
+        bf.peak_freq_hz = peak_hz;
+        BSP_BkpSram_PushFrame(&bf, NULL, 0U);
+
+        if ((h800_v > FAULT_800_TH_V) && ((HAL_GetTick() - s_last_bb_tick) >= 1000U))
+        {
+            BlackboxRecord_t rec;
+            s_last_bb_tick = HAL_GetTick();
+            BSP_BkpSram_Freeze((uint8_t)BB_FAULT_HIL_800HZ, 0U);
+
+            memset(&rec, 0, sizeof(rec));
+            rec.timestamp_ms = s_last_bb_tick;
+            rec.peak_freq_hz = peak_hz;
+            rec.z_score      = h800_v;
+            rec.rms_mg       = peak_v;
+            rec.fault_type   = (uint8_t)BB_FAULT_HIL_800HZ;
+            rec.mode         = 0U;
+            APP_Blackbox_PushFault(&rec, s_fft_mag, FFT_LEN / 2U, ADC_FS_HZ);
+        }
+    }
 }
 
 static void Task_DSP_FFT(void *arg)

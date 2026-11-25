@@ -27,6 +27,9 @@
 /* USER CODE BEGIN Includes */
 #include "app_cli.h"
 #include "app_dsp.h"
+#include "bsp_w25qxx.h"
+#include "app_blackbox.h"
+#include "bsp_bkpsram.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -52,7 +55,7 @@
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
-  .stack_size = 128 * 4,
+  .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 
@@ -108,8 +111,11 @@ void MX_FREERTOS_Init(void) {
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
+  BSP_BkpSram_Init();
   APP_CLI_Init();
+  APP_Blackbox_Init();
   APP_DSP_Init();
+  
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
@@ -129,8 +135,11 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
+    uint32_t flash_id = BSP_W25Q_ReadJEDECID();
+
   for(;;)
   {
+      
  HAL_GPIO_TogglePin(LED0_GPIO_Port, LED0_Pin);
     osDelay(500);
   }
