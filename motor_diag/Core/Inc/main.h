@@ -57,12 +57,31 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ADXL_CS_Pin GPIO_PIN_5
+#define ADXL_CS_GPIO_Port GPIOE
+#define OLED_CS_Pin GPIO_PIN_6
+#define OLED_CS_GPIO_Port GPIOE
+#define OLED_DC_Pin GPIO_PIN_13
+#define OLED_DC_GPIO_Port GPIOC
+#define STEP_IN4_Pin GPIO_PIN_6
+#define STEP_IN4_GPIO_Port GPIOF
 #define LED0_Pin GPIO_PIN_9
 #define LED0_GPIO_Port GPIOF
+#define ADXL_INT_Pin GPIO_PIN_0
+#define ADXL_INT_GPIO_Port GPIOB
+#define ADXL_INT_EXTI_IRQn EXTI0_IRQn
 #define W25Q_CS_Pin GPIO_PIN_14
 #define W25Q_CS_GPIO_Port GPIOB
 #define NRF_CS_Pin GPIO_PIN_7
 #define NRF_CS_GPIO_Port GPIOG
+#define STEP_IN3_Pin GPIO_PIN_7
+#define STEP_IN3_GPIO_Port GPIOC
+#define DS18B20_DQ_Pin GPIO_PIN_9
+#define DS18B20_DQ_GPIO_Port GPIOG
+#define STEP_IN1_Pin GPIO_PIN_6
+#define STEP_IN1_GPIO_Port GPIOB
+#define STEP_IN2_Pin GPIO_PIN_7
+#define STEP_IN2_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

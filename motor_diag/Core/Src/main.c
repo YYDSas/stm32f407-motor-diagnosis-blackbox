@@ -30,6 +30,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "bsp_dwt.h"
+#include "bsp_stepper.h"
+#include "bsp_adxl345.h"
+#include "app_dsp.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -101,6 +104,8 @@ BSP_DWT_Init();
   MX_ADC1_Init();
   MX_TIM2_Init();
   MX_SPI1_Init();
+  MX_SPI2_Init();
+  MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -171,7 +176,13 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if (GPIO_Pin == GPIO_PIN_0)
+    {
+     APP_DSP_OnAdxlExtiFromISR();
+    }
+}
 /* USER CODE END 4 */
 
 /**
@@ -185,7 +196,10 @@ void SystemClock_Config(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
-
+if (htim->Instance == TIM7)
+{
+    BSP_Stepper_OnTimPeriodElapsed();
+}
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM14)
   {

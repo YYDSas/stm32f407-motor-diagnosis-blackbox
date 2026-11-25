@@ -1316,6 +1316,26 @@
               <FileType>1</FileType>
               <FilePath>..\BSP\Src\bsp_bkpsram.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_adxl345.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\Src\bsp_adxl345.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_stepper.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\Src\bsp_stepper.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_oled.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\Src\bsp_oled.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_ds18b20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\Src\bsp_ds18b20.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1340,6 +1360,16 @@
               <FileName>bb_core.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\APP\Src\bb_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_baseline.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\Src\app_baseline.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_sensor_ui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\Src\app_sensor_ui.c</FilePath>
             </File>
           </Files>
         </Group>

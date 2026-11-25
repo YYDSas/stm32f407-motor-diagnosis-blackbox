@@ -30,6 +30,7 @@
 #include "bsp_w25qxx.h"
 #include "app_blackbox.h"
 #include "bsp_bkpsram.h"
+#include "app_sensor_ui.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -111,11 +112,11 @@ void MX_FREERTOS_Init(void) {
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
-  BSP_BkpSram_Init();
-  APP_CLI_Init();
-  APP_Blackbox_Init();
-  APP_DSP_Init();
-  
+BSP_BkpSram_Init();
+APP_CLI_Init();
+APP_Blackbox_Init();
+APP_DSP_Init();
+APP_SensorUI_Init();
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
