@@ -26,6 +26,7 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+#include "fsmc.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -106,6 +107,7 @@ BSP_DWT_Init();
   MX_SPI1_Init();
   MX_SPI2_Init();
   MX_TIM7_Init();
+  MX_FSMC_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -178,7 +180,7 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-    if (GPIO_Pin == GPIO_PIN_0)
+    if (GPIO_Pin == GPIO_PIN_6)
     {
      APP_DSP_OnAdxlExtiFromISR();
     }

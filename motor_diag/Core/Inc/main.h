@@ -67,9 +67,6 @@ void Error_Handler(void);
 #define STEP_IN4_GPIO_Port GPIOF
 #define LED0_Pin GPIO_PIN_9
 #define LED0_GPIO_Port GPIOF
-#define ADXL_INT_Pin GPIO_PIN_0
-#define ADXL_INT_GPIO_Port GPIOB
-#define ADXL_INT_EXTI_IRQn EXTI0_IRQn
 #define W25Q_CS_Pin GPIO_PIN_14
 #define W25Q_CS_GPIO_Port GPIOB
 #define NRF_CS_Pin GPIO_PIN_7
