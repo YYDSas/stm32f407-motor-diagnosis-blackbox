@@ -31,6 +31,7 @@
 #include "app_blackbox.h"
 #include "bsp_bkpsram.h"
 #include "app_sensor_ui.h"
+#include "app_supervisor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -117,6 +118,7 @@ APP_CLI_Init();
 APP_Blackbox_Init();
 APP_DSP_Init();
 APP_SensorUI_Init();
+APP_Supervisor_Init();
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */

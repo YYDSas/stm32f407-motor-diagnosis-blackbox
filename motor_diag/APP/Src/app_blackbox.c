@@ -7,6 +7,7 @@
 #include "task.h"
 #include "queue.h"
 #include "semphr.h"
+#include "app_supervisor.h"
 #include <string.h>
 
 #define BB_EVENT_POOL_SIZE   (4U)
@@ -178,6 +179,7 @@ static void Task_Blackbox(void *arg)
     /* 3. 主循环：处理异步故障事件或拔电撕裂压测 */
     for (;;)
     {
+        APP_Supervisor_Heartbeat(SUP_HB_BB);
         TickType_t wait_ticks = (s_stress_on != 0U) ? pdMS_TO_TICKS(20) : pdMS_TO_TICKS(500);
 
         if (xQueueReceive(s_bb_queue, &idx, wait_ticks) == pdTRUE)

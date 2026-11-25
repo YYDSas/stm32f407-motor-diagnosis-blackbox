@@ -12,6 +12,7 @@
 #include "app_blackbox.h"
 #include "bsp_stepper.h"
 #include "bsp_adxl345.h"
+#include "app_supervisor.h"
 #include "app_sensor_ui.h"
 #include <stdlib.h>
 #define CLI_RX_BUF_SIZE   128
@@ -221,6 +222,14 @@ else if (strncmp(cmd, "dump", 4) == 0)
                    (unsigned int)BSP_Stepper_GetMode(),
                    (unsigned int)BSP_Stepper_GetStepHz());
     }
+    else if (strcmp(cmd, "fault fft") == 0)
+{
+    APP_Supervisor_InjectFftDeadlock();
+}
+else if (strcmp(cmd, "resetinfo") == 0)
+{
+    APP_Supervisor_PrintInfo();
+}
     else if (strcmp(cmd, "adxl init") == 0 || strcmp(cmd, "adxl int2") == 0)
     {
         uint8_t use_int2 = (strcmp(cmd, "adxl int2") == 0) ? 1U : 0U;

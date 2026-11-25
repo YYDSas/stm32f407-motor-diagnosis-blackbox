@@ -18,6 +18,12 @@
 **/tests/*.exe
 **/tests/*.out
 
+# 上位机工具运行产物（保留脚本，忽略抓到的数据）
+motor_diag/tools/*.log
+motor_diag/tools/*.csv
+motor_diag/tools/*.png
+motor_diag/tools/*.txt
+
 # OS / Editor
 .DS_Store
 .vscode/

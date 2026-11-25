@@ -1,0 +1,29 @@
+# START_BB_META: {'valid': 899, 'corrupt': 0, 'next_seq': 22018, 'showing': 5}
+[21:04:39.962] Task            State   Prio    Stack   Num
+[21:04:39.963] --------------------------------------------
+[21:04:39.964] Task_CLI       	X	2	284	2
+[21:04:39.964] IDLE           	R	0	117	8
+[21:04:39.964] Task_DSP_FFT   	B	28	440	4
+[21:04:39.965] Task_Sensor    	B	22	208	5
+[21:04:39.965] Task_UI_LCD    	B	10	322	6
+[21:04:39.965] Task_Super     	B	15	240	7
+[21:04:39.966] defaultTask    	B	24	212	1
+[21:04:39.966] Task_Blackbox  	B	20	344	3
+[21:04:39.967] Tmr Svc        	B	2	230	9
+[21:04:39.967] Free Heap: 18768 B | Min Ever Free: 18432 B
+[21:04:39.973] [SUP] ResetReason=POR_POWERON (RCC_CSR=0x0E000003) | IWDG_Feeds=161 | Uptime=40871ms
+[21:04:39.976]   HB[0] DSP      : last_seen=55 ms ago
+[21:04:39.982]   HB[1] SENSOR   : last_seen=55 ms ago
+[21:04:39.985]   HB[2] BLACKBOX : last_seen=55 ms ago
+[21:04:39.989]   HB[3] UI_LCD   : last_seen=55 ms ago
+[21:04:44.376] [BB] Saved seq=22018 type=OVERLOAD peak=34.4Hz val=7.00 snap=40
+[21:04:45.484] [BB] Saved seq=22019 type=OVERLOAD peak=25.0Hz val=15.09 snap=41
+[21:04:46.504] [BB] Saved seq=22020 type=LOOSE peak=50.0Hz val=9.59 snap=42
+[21:04:48.741] [BB] Saved seq=22021 type=LOOSE peak=15.6Hz val=6.21 snap=43
+[21:04:50.512] [BB] Saved seq=22022 type=OVERLOAD peak=37.5Hz val=6.98 snap=44
+[21:04:51.620] [BB] Saved seq=22023 type=LOOSE peak=15.6Hz val=21.46 snap=45
+[21:04:52.739] [BB] Saved seq=22024 type=LOOSE peak=15.6Hz val=4.87 snap=46
+[21:04:54.018] [BB] Saved seq=22025 type=LOOSE peak=12.5Hz val=9.16 snap=47
+[21:04:55.147] [BB] Saved seq=22026 type=OVERLOAD peak=9.4Hz val=11.52 snap=48
+[21:05:10.258] _�_�����
+[21:05:40.309] �����_���

@@ -14,7 +14,7 @@
 #include "arm_math.h"
 #include <math.h>
 #include <string.h>
-
+#include "app_supervisor.h"
 #define FFT_LEN          1024U
 #define PHY_HOP_LEN      512U      /* 50% ÖØµþ»¬´°: 512 / 3200 = 160 ms/Ö¡ */
 #define ADC_FS_HZ        10240.16f
@@ -435,6 +435,11 @@ static void Task_DSP_FFT(void *arg)
 
     for (;;)
     {
+        if (APP_Supervisor_IsFftDeadlockInjected() != 0U)
+        {
+           for (;;) { __NOP(); }
+        }
+        APP_Supervisor_Heartbeat(SUP_HB_DSP);
         TickType_t wait_t = (s_chan_mode != 0U) ? pdMS_TO_TICKS(20) : portMAX_DELAY;
         BaseType_t got = xTaskNotifyWait(0U, 0xFFFFFFFFU, &notify_val, wait_t);
 

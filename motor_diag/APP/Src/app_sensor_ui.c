@@ -17,6 +17,7 @@
 #include "stm32f4xx_hal.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "app_supervisor.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -145,6 +146,7 @@ static void Task_Sensor(void *arg)
 
     for (;;)
     {
+        APP_Supervisor_Heartbeat(SUP_HB_SENSOR);
         if (BSP_DS18B20_StartConvert() != 0U)
         {
             int16_t t_x10 = 0;
@@ -205,6 +207,8 @@ static void Task_UI_LCD(void *arg)
 
     for (;;)
     {
+        APP_Supervisor_Heartbeat(SUP_HB_UI);
+        vTaskDelay(pdMS_TO_TICKS(100));
         DSP_Result_t r;
         int16_t  t_x10 = 0;
         uint8_t  t_ok;
